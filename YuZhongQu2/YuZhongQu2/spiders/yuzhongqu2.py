@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import urllib2
-import urllib
 import json
-from urllib import urlencode
 from scrapy.http import Request
 from lxml import etree
 from YuZhongQu2.items import Yuzhongqu2Item
 import re
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 class Yuzhongqu2Spider(scrapy.Spider):
     name = 'yuzhongqu2'
@@ -26,6 +20,7 @@ class Yuzhongqu2Spider(scrapy.Spider):
         title_list =[]
 
         html = response.body
+        html = html.decode('utf-8')
 
         _VIEWSTATE = re.findall(r'id="__VIEWSTATE.*?value="(.*?)"',html)[0]
 
@@ -57,8 +52,8 @@ class Yuzhongqu2Spider(scrapy.Spider):
         #with open('/home/jessyl/YuZhongQu2/第一部分爬取内容.txt','a') as f1:
             #f1.writelines(results1)
 
-        if len(self.url_list) != 870:
-        #if len(self.url_list) != 40:
+        #if len(self.url_list) != 870:
+        if len(self.url_list) != 40:
             self.i +=1
             print("yes")
             print(len(self.url_list))
